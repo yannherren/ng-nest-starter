@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "travelware-app": "apps/travelware-app",
+    "travelware-app-e2e": "apps/travelware-app-e2e"
+  }
+}
