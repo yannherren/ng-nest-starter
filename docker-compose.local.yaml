@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+  nx-build:
+    build:
+      context: .
+      dockerfile: .docker/nx/Dockerfile
+    env_file:
+      - .env.local
+    volumes:
+      - .:/usr/local/app
+
+  frontend-nginx:
+    image: nginx:1.20.2
+    volumes:
+      - ./dist/apps/travelware-app:/usr/share/nginx/html
+    networks:
+      - travelware-default
+    ports:
+    - 80:80
+
+  api-node:
+    env_file:
+      - .env.local
+    build:
+      context: .
+      dockerfile: ./.docker/node/dev/Dockerfile
+    volumes:
+      - .:/usr/local/app
+    networks:
+      - travelware-default
+    ports:
+      - 3333:3333
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:17.0.0
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - DB_VENDOR=POSTGRES
+      - DB_ADDR=postgresdb
+      - DB_DATABASE=keycloak
+      - DB_USER=kc-user
+      - DB_PASSWORD=password
+    networks:
+      - travelware-default
+    command:
+      - start-dev
+    ports:
+    - 8080:8080
+
+  postgresdb:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_DB=travelware
+      - POSTGRES_USER=tw-user
+      - POSTGRES_PASSWORD=password
+      - KEYCLOAK_DB=keycloak
+      - KEYCLOAK_USER=kc-user
+      - KEYCLOAK_PASSWORD=password
+
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+    networks:
+      - travelware-default
+
+volumes:
+  db-data:
+
+networks:
+  travelware-default:

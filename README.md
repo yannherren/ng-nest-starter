@@ -1,6 +1,9 @@
-
-
 # Travelware
+
+## Start the application
+
+### Hot reload
+`docker-compose -f docker-compose.local.yaml run nx-build nx run-many --target=build --configuration=development --all --watch=true`
 
 This project was generated using [Nx](https://nx.dev).
 
