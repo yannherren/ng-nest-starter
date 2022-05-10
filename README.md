@@ -16,6 +16,20 @@ To enable hot reload for the frontend and backend run this command:
 
 `docker-compose -f docker-compose.local.yaml run nx-build nx run-many --target=build --configuration=development --all --watch=true`
 
+### Configuration
+Navigate to `http://localhost:8080` and login with the credentials defined in `docker-compose.local.yaml`
+Please notice that an external keycloak instance is required to make the authentication work. Otherwise, the realm origins won't match properly.
+Create a new realm and upload the provided `keycloak-config.json` file.
+
+You should now be able to register a user with the `/register` endpoint using a post request with the following body schema:
+```
+{
+  "firstName": "Yann",
+  "lastName": "Herren",
+  "email": "mail@example.com",
+  "password": "password1234"
+}
+```
 
 This project was generated using [Nx](https://nx.dev).
 
