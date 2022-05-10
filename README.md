@@ -1,9 +1,17 @@
-# Travelware
+# ng-nest-starter
 
 ## Start the application
 
+### Initial build and start
+To initially build and start the application use the following command:
+
+`docker-compose -f docker-compose.local.yaml up`
+
 ### Hot reload
+To enable hot reload for the frontend and backend run this command:
+
 `docker-compose -f docker-compose.local.yaml run nx-build nx run-many --target=build --configuration=development --all --watch=true`
+
 
 This project was generated using [Nx](https://nx.dev).
 
