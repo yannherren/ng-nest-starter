@@ -1,5 +1,9 @@
 # ng-nest-starter
 
+Starter project for a Keycloak secured full stack web application using Angular and NestJS with a PostgreSQL database.
+
+![badge](https://img.shields.io/badge/Yann%20Herren-ng--nest--starter-green?style=for-the-badge)
+
 ## Start the application
 
 ### Initial build and start
